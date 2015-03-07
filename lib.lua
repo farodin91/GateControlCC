@@ -374,6 +374,7 @@ Stargate = {
       Stargate.Responder(type,unpack(tArgs))
     end
   end,
+  
   Present = function()
     if pocket or not Current.Settings.host then
       return false
@@ -385,10 +386,39 @@ Stargate = {
       end
     end
   end,
+
+  HandleMessageWireless = function(id,message)
+    if message.protocol == 'stargate' and message.version >= 1 then
+      local f = Stargate[message.response.action]
+      local ok,result = pcall(f,message.response.content)
+      Wireless.SendMessage(Wireless.Channels.GateRequestReply,{protocol = 'stargate',version = version, response = {action=message.response.action,ok=ok,result=result}},Wireless.Channels.GateRequestReply)
+    end
+  end,
+
+  RecieveMessage = function(id)
+    local event, side, channel, replyChannel, message = Wireless.RecieveMessage(Wireless.Channels.GateRequestReply,id,5)
+    local content =  message.content
+    if content == nil then 
+      return nil
+    elseif content.protocol == 'stargate' and content.version >= 1 then
+      return content.response.result
+    end 
+  end,
+
+  SendMessage = function(action,args)
+    local msg = nil
+    if args == nil then
+      msg = Wireless.SendMessage(Wireless.Channels.GateRequest,{protocol = 'stargate',version = version, response = {action=action}},Wireless.Channels.GateRequestReply)
+    else
+      msg = Wireless.SendMessage(Wireless.Channels.GateRequest,{protocol = 'stargate',version = version, response = {action=action,content=args}},Wireless.Channels.GateRequestReply)
+    end
+    return msg.messageID
+  end,
   
   OpenIris = function()
     if pocket or not Current.Settings.host then
-
+      local id = Stargate.SendMessage('OpenIris')
+      return Stargate.RecieveMessage(id)
     else
       Peripheral.CallType(Stargate.label, 'openIris')
     end
@@ -396,30 +426,60 @@ Stargate = {
 
   CloseIris = function()
     if pocket or not Current.Settings.host then
-
+      local id = Stargate.SendMessage('CloseIris')
+      return Stargate.RecieveMessage(id)
     else
       Peripheral.CallType(Stargate.label, 'closeIris')
     end
   end,
 
-  IrisState = function()
+  GetIrisState = function()
     if pocket or not Current.Settings.host then
-
+      local id = Stargate.SendMessage('GetIrisState')
+      return Stargate.RecieveMessage(id)
     else
       return Peripheral.CallType(Stargate.label, 'irisState')
     end
   end,
-
-  StargateState = function()
+  
+  GetRemoteAddress = function()
     if pocket or not Current.Settings.host then
+      local id = Stargate.SendMessage('GetRemoteAddress')
+      return Stargate.RecieveMessage(id)
+    else
+      return Peripheral.CallType(Stargate.label, 'remoteAddress')
+    end
+  end,
+  
+  GetLocalAddress = function()
+    if pocket or not Current.Settings.host then
+      local id = Stargate.SendMessage('GetLocalAddress')
+      return Stargate.RecieveMessage(id)
+    else
+      return Peripheral.CallType(Stargate.label, 'localAddress')
+    end
+  end,
 
+  GetStargateState = function()
+    if pocket or not Current.Settings.host then
+      return "Soon","Soon","Soon"
     else
       return Peripheral.CallType(Stargate.label, 'stargateState')
+    end
+  end,
+  
+  GetEnergyAvailable = function()
+    if pocket or not Current.Settings.host then
+      return "Soon"
+    else
+      return Peripheral.CallType(Stargate.label, 'energyAvailable')
     end
   end,
 
   Discount = function()
     if pocket or not Current.Settings.host then
+      local id = Stargate.SendMessage('Discount')
+      return Stargate.RecieveMessage(id)
 
     else
       return Peripheral.CallType(Stargate.label, 'disconnect')
@@ -428,10 +488,10 @@ Stargate = {
 
   Dail = function(address)
     if pocket or not Current.Settings.host then
-
+      local id = Stargate.SendMessage('Dail',address)
+      return Stargate.RecieveMessage(id)
     else
-
-      return pcall(Peripheral.CallType, Stargate.label, 'dail', address)
+      return Peripheral.CallType(Stargate.label, 'dail', address)
     end
   end,
 }

@@ -102,9 +102,11 @@ function HostStatusPage()
           else
             Wireless.SendMessage(Wireless.Channels.GateRequestReply, {protocol = 'fingerprint',version = version, response = false} )
           end
+        elseif msg.protocol == 'stargate' then
+          Stargate.HandleMessageWireless(message.messageID,msg)
         end
       elseif channel == Wireless.Channels.GateRequestReply then
-
+        
       end
     end
   end
@@ -234,8 +236,26 @@ function PocketIrisPage()
   table.insert(Current.PageControls, Button:Initialise(2,5, nil, nil, nil, nil, PocketOpenIrisPage, 'Open', colours.black))
 end
 
+function AddLabelValue(line,label,value)
+  table.insert(Current.PageControls, Label:Initialise(1, line, label, colours.blue))
+  table.insert(Current.PageControls, Label:Initialise(1+12, line, value, colours.blue))
+end
+
 function PocketStatePage()
   PocketResetPage("PocketStatePage","State Page")
+
+  local locAddr = Stargate.GetLocalAddress()
+  AddLabelValue(3,"Local:",locAddr)
+  local remAddr = Stargate.GetRemoteAddress()
+  AddLabelValue(3,"Remote:",remAddr)
+  local state, chevrons, direction = Stargate.GetStargateState()
+  AddLabelValue(3,"State:",state)
+  AddLabelValue(3,"Engaged:",chevrons)
+  AddLabelValue(3,"Direction:",direction)
+  local energy = Stargate.GetEnergyAvailable()
+  AddLabelValue(3,"Energy:",energy)
+  local iris = Stargate.GetIrisState()
+  AddLabelValue(3,"Iris:",iris)
 end
 
 function PocketDisconnectPage()
