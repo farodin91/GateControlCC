@@ -354,7 +354,7 @@ function Timer(event, timer)
   if timer == pingTimer then
     PingPocketComputers()
   elseif timer == statusResetTimer then
-    ResetStatus()
+    --ResetStatus()
   end
 end
 
