@@ -210,28 +210,28 @@ end
 function PocketCallHome()
 end
 
-function PocketDailingPage(address)
-  PocketResetPage("PocketDailingPage","Dailing Page")
+function PocketDialingPage(address)
+  PocketResetPage("PocketDialingPage","Dialing Page")
   
   Draw()
 
-  Stargate.Dail(address)
+  Stargate.Dial(address)
 end
 
-function PocketDailPage()
-  PocketResetPage("PocketDailPage","Dail Page")
+function PocketDialPage()
+  PocketResetPage("PocketDialPage","Dial Page")
 
-  table.insert(Current.PageControls, Label:Initialise(1, 3, 'Instant Dails', colours.blue))
+  table.insert(Current.PageControls, Label:Initialise(1, 3, 'Instant Dials', colours.blue))
   table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 5, 3, nil, nil, nil, nil, nil, 'Add', colours.black))
   local lastI = 0
   for i,v in ipairs(Current.Settings.Addresses) do
-    local dailing = function()
-      PocketDailingPage(v[1])
+    local dialing = function()
+      PocketDialingPage(v[1])
     end
-    table.insert(Current.PageControls, Button:Initialise(1, 4 + i, nil, nil, nil, nil, dailing, v[2], colours.black))
+    table.insert(Current.PageControls, Button:Initialise(1, 4 + i, nil, nil, nil, nil, dialing, v[2], colours.black))
     lastI = i
   end
-  table.insert(Current.PageControls, Label:Initialise(1, 6 + lastI, 'Maunal Dail', colours.blue))
+  table.insert(Current.PageControls, Label:Initialise(1, 6 + lastI, 'Maunal Dial', colours.blue))
 end
 
 function PocketIrisPage()

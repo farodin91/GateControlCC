@@ -497,13 +497,13 @@ Stargate = {
     end
   end,
 
-  Dail = function(address)
+  Dial = function(address)
     if pocket or not Current.Settings.host then
-      local id = Stargate.SendMessage('Dail',address)
+      local id = Stargate.SendMessage('Dial',address)
       return Stargate.RecieveMessage(id)
     else
-      SetText('Stargate Control', 'Dail..'..address, colours.grey, true)
-      return Peripheral.CallType(Stargate.label, 'dail', address)
+      SetText('Stargate Control', 'Dial..'..address, colours.grey, true)
+      return Peripheral.CallType(Stargate.label, 'dial', address)
     end
   end,
 }
