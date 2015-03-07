@@ -34,7 +34,8 @@ DefaultSettings = {
   Addresses = {},
   Distance = 10,
   host =  true,
-  password = '1337'
+  password = '1337',
+  Home = ''
 }
 
 dofile("lib")
@@ -207,8 +208,6 @@ function PocketResetPage(value,label)
   AddHeader(label)
 end
 
-function PocketCallHome()
-end
 
 function PocketDialingPage(address)
   PocketResetPage("PocketDialingPage","Dialing Page")
@@ -320,6 +319,11 @@ function PocketHomePage()
   table.insert(Current.PageControls, Button:Initialise(2, Drawing.Screen.Height - 1, nil, nil, nil, nil, os.reboot, 'Reboot', colours.black))
 
   if not Current.Intern then
+
+
+    local PocketCallHome =function ()
+      PocketDialingPage(Current.Settings.Home)
+    end
     table.insert(Current.PageControls, Button:Initialise(2,3, nil, nil, nil, nil, PocketCallHome, 'Call Home', colours.black))
     table.insert(Current.PageControls, Button:Initialise(2,5, nil, nil, nil, nil, PocketDialPage, 'Dial', colours.black))
     table.insert(Current.PageControls, Button:Initialise(2,7, nil, nil, nil, nil, Stargate.Disconnect, 'Disconnect', colours.black))
