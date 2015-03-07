@@ -397,6 +397,9 @@ Stargate = {
       else
         ok,result = pcall(f,message.response.content)
       end
+      if message.response.action == 'Dial' then
+        SetText('Stargate Control', result, colours.grey, true)
+      end
       Wireless.SendMessage(Wireless.Channels.GateRequestReply,{protocol = 'stargate',version = version, response = {action=message.response.action,ok=ok,result=result}},nil,id)
     end
   end,
