@@ -121,6 +121,7 @@ end
 function HostSetupPage()
   ResetPage()
   Current.Page = 'HostSetup'
+  AddHeader("Settings Page")
   table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 6, Drawing.Screen.Height - 1, nil, nil, nil, nil, HostStatusPage, 'Save', colours.black))
   if not Current.Settings then
     Current.Settings = DefaultSettings
