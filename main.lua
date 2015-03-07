@@ -186,14 +186,18 @@ function HostSetupPage()
   end, 'Register New PDA', colours.black))
 end
 
+function AddHeader(label)
+  local x = math.ceil((Drawing.Width - #label) / 2) 
+  table.insert(Current.PageControls, Label:Initialise(x, 1, label, colours.blue))
+end
+
 function PocketResetPage(value,label)
   ResetPage()
   Current.Page = value
   table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 6, Drawing.Screen.Height - 1, nil, nil, nil, nil, Quit, 'Quit', colours.black))
   table.insert(Current.PageControls, Button:Initialise(2, Drawing.Screen.Height - 1, nil, nil, nil, nil, PocketHomePage, 'Menu', colours.black))
 
-  local x = math.ceil((Drawing.Width - #label) / 2) 
-  table.insert(Current.PageControls, Label:Initialise(x, 1, label, colours.blue))
+  AddHeader(label)
 end
 
 function PocketCallHome()
@@ -226,9 +230,8 @@ end
 function PocketHomePage()
   ResetPage()
   Current.Page = 'PocketHome'
-  local label = "Home Page"
-  local x = math.ceil((Drawing.Width - #label) / 2) 
-  table.insert(Current.PageControls, Label:Initialise(x, 1, label, colours.blue))
+  AddHeader("Home Page")
+  
   table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 6, Drawing.Screen.Height - 1, nil, nil, nil, nil, Quit, 'Quit', colours.black))
   table.insert(Current.PageControls, Button:Initialise(2, Drawing.Screen.Height - 1, nil, nil, nil, nil, os.reboot, 'Reboot', colours.black))
 
