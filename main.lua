@@ -236,8 +236,8 @@ function PocketAddingDialPage()
     end
   end
 
-  textbox = TextBox:Initialise(10, 5, 10, nil, nil, nil, colours.white,colours.black,change,nil)
-  textbox2 = TextBox:Initialise(10, 6, 10, nil, nil, nil, colours.white,colours.black,nil,nil)
+  textbox = TextBox:Initialise(10, 5, 10, nil, nil, nil, colours.black,colours.white,change,nil)
+  textbox2 = TextBox:Initialise(10, 6, 10, nil, nil, nil, colours.black,colours.white,nil,nil)
 
   local addAddress = function()
     local name = textbox.TextInput.Value
@@ -247,6 +247,9 @@ function PocketAddingDialPage()
       SaveSettings()
     end
   end
+  Current.TextInput = textbox.TextInput
+  table.insert(Current.PageControls, textbox)
+  table.insert(Current.PageControls, textbox2)
 
   table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 6, Drawing.Screen.Height - 1, nil, nil, nil, nil, addAddress, 'Save', colours.black))
 
