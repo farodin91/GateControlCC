@@ -217,7 +217,7 @@ Wireless = {
   end,
 
   RecieveMessage = function(_channel, messageID, timeout)
-    open(_channel)
+    Wireless.Open(_channel)
     local done = false
     local event, side, channel, replyChannel, message = nil
     Timeout(function()
