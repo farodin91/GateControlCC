@@ -195,7 +195,7 @@ function AddHeader(label)
   if label == nil then
     label = "Label doesn't set!"
   end
-  local x = math.ceil((Drawing.Screen.Width - #label) / 2) 
+  local x = math.ceil((Drawing.Screen.Width - #label) / 2) +1
   table.insert(Current.PageControls, Label:Initialise(x, 1, label, colours.blue))
 end
 
