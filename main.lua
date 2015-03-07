@@ -206,7 +206,6 @@ function PocketDailPage()
   table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 5, 3, nil, nil, nil, nil, nil, 'Add', colours.black))
   table.insert(Current.PageControls, Label:Initialise(1, 3, 'Maunal Dail', colours.blue))
 
-  Stargate
 
   Drawing.Clear(colours.white)
 end
