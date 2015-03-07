@@ -476,9 +476,9 @@ Stargate = {
     end
   end,
 
-  Discount = function()
+  Disconnect = function()
     if pocket or not Current.Settings.host then
-      local id = Stargate.SendMessage('Discount')
+      local id = Stargate.SendMessage('Disconnect')
       return Stargate.RecieveMessage(id)
 
     else
