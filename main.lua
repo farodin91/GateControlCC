@@ -211,6 +211,11 @@ end
 
 function PocketDialingPage(address)
   PocketResetPage("PocketDialingPage","Dialing Page")
+
+
+  local width = Drawing.Screen.Width -6
+  local Progress = ProgressBar:Initialise(3, Drawing.Screen.Height - 3, width,1,nil,10,nil,nil,nil)
+  table.insert(Current.PageControls, Progress)
   
   Draw()
 

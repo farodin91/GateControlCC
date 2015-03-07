@@ -320,6 +320,91 @@ Label = {
   end
 }
 
+ProgressBar = {
+  X = 1,
+  Y = 1,
+  Height = 0,
+  Width = 0,
+  BackgroundColour = colours.lightGrey,
+  BarColour = colours.blue,
+  TextColour = colours.white,
+  ShowText = false,
+  Value = 0,
+  Maximum = 1,
+  Indeterminate = false,
+  AnimationStep = 0,
+  Parent = nil,
+
+  AbsolutePosition = function(self)
+    return self.Parent:AbsolutePosition()
+  end,
+
+  Initialise = function(self, x, y, width, height, parent, value, backgroundColour, textColour, barColour)
+    local new = {}    -- the new instance
+    setmetatable( new, {__index = self} )
+    new.Width = width or 6
+    new.Height = height or 1
+    new.Y = y
+    new.X = x
+    new.BackgroundColour = backgroundColour or colours.lightGrey
+    new.TextColour = textColour or colours.black
+    new.BarColour = textColour or colours.white
+    new.Parent = parent
+    return new
+  end,
+
+  UpdateValue  = function(self,value)
+    self.Value = value
+    self.Draw()
+  end,
+
+  Draw = function(self)
+    Drawing.DrawBlankArea(X, Y, self.Width, self.Height, self.BackgroundColour)
+-- if self.Indeterminate then
+-- for i = 1, self.Width do
+-- local s = x + i - 1 + self.AnimationStep
+-- if s % 4 == 1 or s % 4 == 2 then
+-- Drawing.DrawBlankArea(s, y, 1, self.Height, self.BarColour)
+-- end
+-- end
+-- self.AnimationStep = self.AnimationStep + 1
+-- if self.AnimationStep >= 4 then
+-- self.AnimationStep = 0
+-- end
+-- self.Bedrock:StartTimer(function()
+-- self:Draw()
+-- end, 0.25)
+-- else
+    local values = self.Value
+    local barColours = self.BarColour
+    if type(values) == 'number' then
+      values = {values}
+    end
+    if type(barColours) == 'number' then
+      barColours = {barColours}
+    end
+    local total = 0
+    local _x = X
+    for i, v in ipairs(values) do
+      local width = (v == 0 and 0 or round((v / self.Maximum) * self.Width))
+      total = total + v
+      if width ~= 0 then
+        Drawing.DrawBlankArea(_x, Y, width, self.Height, barColours[((i-1)%#barColours)+1])
+      end
+      _x = _x + width
+    end
+    if self.ShowText then
+      local text = round((total / self.Maximum) * 100) .. '%'
+      Drawing.DrawCharactersCenter(X, Y, self.Width, self.Height, text, self.TextColour, colours.transparent)
+    end
+    -- end
+  end,
+
+  Click = function(self, side, x, y)
+    return false
+  end
+}
+
 TextBox = {
   X = 1,
   Y = 1,
