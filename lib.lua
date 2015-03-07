@@ -397,12 +397,15 @@ Stargate = {
 
   RecieveMessage = function(id)
     local event, side, channel, replyChannel, message = Wireless.RecieveMessage(Wireless.Channels.GateRequestReply,id,5)
-    local content =  message.content
-    if content == nil then 
-      return nil
-    elseif content.protocol == 'stargate' and content.version >= 1 then
-      return content.response.result
-    end 
+    if message then
+      local content =  message.content
+      if content == nil then 
+        return nil
+      elseif content.protocol == 'stargate' and content.version >= 1 then
+        return content.response.result
+      end 
+    end
+    return nil
   end,
 
   SendMessage = function(action,args)
