@@ -187,8 +187,11 @@ function HostSetupPage()
 end
 
 function AddHeader(label)
-  local x = math.ceil((Drawing.Width - #label) / 2) 
-  table.insert(Current.PageControls, Label:Initialise(x, 1, label, colours.blue))
+  if label == nil then
+    label = "Label doesn't set!"
+  end
+    local x = math.ceil((Drawing.Width - #label) / 2) 
+    table.insert(Current.PageControls, Label:Initialise(x, 1, label, colours.blue))
 end
 
 function PocketResetPage(value,label)
