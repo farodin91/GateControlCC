@@ -390,7 +390,7 @@ Stargate = {
   HandleMessageWireless = function(id,message)
     if message.protocol == 'stargate' and message.version >= 1 then
       local f = Stargate[message.response.action]
-      local ok =nil
+      local ok = nil
       local result = nil
       if message.response.content == nil then
         ok,result = pcall(f)
@@ -471,7 +471,8 @@ Stargate = {
 
   GetStargateState = function()
     if pocket or not Current.Settings.host then
-      return "Soon","Soon","Soon"
+      local id = Stargate.SendMessage('GetStargateState')
+      return Stargate.RecieveMessage(id)
     else
       return Peripheral.CallType(Stargate.label, 'stargateState')
     end
@@ -479,7 +480,8 @@ Stargate = {
   
   GetEnergyAvailable = function()
     if pocket or not Current.Settings.host then
-      return "Soon"
+      local id = Stargate.SendMessage('GetEnergyAvailable')
+      return Stargate.RecieveMessage(id)
     else
       return Peripheral.CallType(Stargate.label, 'energyAvailable')
     end
@@ -489,7 +491,6 @@ Stargate = {
     if pocket or not Current.Settings.host then
       local id = Stargate.SendMessage('Disconnect')
       return Stargate.RecieveMessage(id)
-
     else
       return Peripheral.CallType(Stargate.label, 'disconnect')
     end

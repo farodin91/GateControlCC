@@ -216,8 +216,6 @@ function PocketDailingPage(address)
   Draw()
 
   Stargate.Dail(address)
-
-
 end
 
 function PocketDailPage()
