@@ -231,7 +231,7 @@ function PocketHomePage()
   ResetPage()
   Current.Page = 'PocketHome'
   AddHeader("Home Page")
-  
+
   table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 6, Drawing.Screen.Height - 1, nil, nil, nil, nil, Quit, 'Quit', colours.black))
   table.insert(Current.PageControls, Button:Initialise(2, Drawing.Screen.Height - 1, nil, nil, nil, nil, os.reboot, 'Reboot', colours.black))
 
@@ -250,9 +250,7 @@ end
 function PocketLoginPage()
   ResetPage()
   Current.Page = 'PocketLogin'
-  local label = "Login Page"
-  local x = math.ceil((Drawing.Width - #label) / 2) 
-  table.insert(Current.PageControls, Label:Initialise(x, 1, label, colours.blue))
+  AddHeader("Login Page")
   
   table.insert(Current.PageControls, Label:Initialise(1, 6, 'Password:'))
 
