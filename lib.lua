@@ -391,7 +391,7 @@ Stargate = {
     if message.protocol == 'stargate' and message.version >= 1 then
       local f = Stargate[message.response.action]
       local ok,result = pcall(f,message.response.content)
-      Wireless.SendMessage(Wireless.Channels.GateRequestReply,{protocol = 'stargate',version = version, response = {action=message.response.action,ok=ok,result=result}})
+      Wireless.SendMessage(Wireless.Channels.GateRequestReply,{protocol = 'stargate',version = version, response = {action=message.response.action,ok=ok,result=result}},nil,id)
     end
   end,
 
