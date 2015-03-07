@@ -1,0 +1,2 @@
+# GateControlCC
+Stargate Control ComputerCraft
