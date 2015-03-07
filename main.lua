@@ -57,8 +57,8 @@ function ResetPage()
 end
 
 function UpdateStargateStatus()
-  Current.IrisState = Stargate.IrisState()
-  local state, chevrons, direction = Stargate.StargateState()
+  Current.IrisState = Stargate.GetIrisState()
+  local state, chevrons, direction = Stargate.GetStargateState()
   Current.StargateState = state
 end
 
@@ -106,7 +106,7 @@ function HostStatusPage()
           Stargate.HandleMessageWireless(message.messageID,msg)
         end
       elseif channel == Wireless.Channels.GateRequestReply then
-        
+
       end
     end
   end
