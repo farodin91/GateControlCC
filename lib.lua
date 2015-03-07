@@ -220,7 +220,7 @@ Wireless = {
     Wireless.Open(_channel)
     local done = false
     local event, side, channel, replyChannel, message = nil
-    Timeout(function()
+    Wireless.Timeout(function()
       while not done do
         event, side, channel, replyChannel, message = os.pullEvent('modem_message')
         if channel ~= _channel then
