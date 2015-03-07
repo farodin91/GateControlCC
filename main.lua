@@ -212,8 +212,11 @@ end
 
 function PocketDailingPage(address)
   PocketResetPage("PocketDailingPage","Dailing Page")
-
   
+  Draw()
+
+  Stargate.Dail(address)
+
 
 end
 
