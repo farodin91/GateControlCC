@@ -408,12 +408,12 @@ Stargate = {
     return nil
   end,
 
-  SendMessage = function(action,args)
+  SendMessage = function(action,arg)
     local msg = nil
-    if args == nil then
+    if arg == nil then
       msg = Wireless.SendMessage(Wireless.Channels.GateRequest,{protocol = 'stargate',version = version, response = {action=action}},Wireless.Channels.GateRequestReply)
     else
-      msg = Wireless.SendMessage(Wireless.Channels.GateRequest,{protocol = 'stargate',version = version, response = {action=action,content=args}},Wireless.Channels.GateRequestReply)
+      msg = Wireless.SendMessage(Wireless.Channels.GateRequest,{protocol = 'stargate',version = version, response = {action=action,content=arg}},Wireless.Channels.GateRequestReply)
     end
     return msg.messageID
   end,
