@@ -245,6 +245,7 @@ function PocketAddingDialPage()
     if name ~= "" and address ~= "" then
       table.insert(Current.Settings.Addresses,{address,name})
       SaveSettings()
+      PocketDialPage()
     end
   end
   Current.TextInput = textbox.TextInput
