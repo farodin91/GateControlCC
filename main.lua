@@ -204,8 +204,7 @@ function PocketDailPage()
 
   table.insert(Current.PageControls, Label:Initialise(1, 3, 'Instant Dails', colours.blue))
   table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 5, 3, nil, nil, nil, nil, nil, 'Add', colours.black))
-  table.insert(Current.PageControls, Label:Initialise(1, 3, 'Maunal Dail', colours.blue))
-
+  table.insert(Current.PageControls, Label:Initialise(1, 4, 'Maunal Dail', colours.blue))
 
   Drawing.Clear(colours.white)
 end
