@@ -259,8 +259,8 @@ function PocketStatePage()
   AddLabelValue(3,"Local:",locAddr)
   local remAddr = Stargate.GetRemoteAddress()
   AddLabelValue(4,"Remote:",remAddr)
-  local state = Stargate.GetStargateState()
-  AddLabelValue(5,"State:",state)
+  local state, chevrons, direction = Stargate.GetStargateState()
+  AddLabelValue(5,"State:",tostring(state))
   if chevrons then
     AddLabelValue(6,"Engaged:",chevrons)
   end
