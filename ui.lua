@@ -384,18 +384,18 @@ ProgressBar = {
       barColours = {barColours}
     end
     local total = 0
-    local _x = X
+    local _x = self.X
     for i, v in ipairs(values) do
       local width = (v == 0 and 0 or round((v / self.Maximum) * self.Width))
       total = total + v
       if width ~= 0 then
-        Drawing.DrawBlankArea(_x, Y, width, self.Height, barColours[((i-1)%#barColours)+1])
+        Drawing.DrawBlankArea(_x, self.Y, width, self.Height, barColours[((i-1)%#barColours)+1])
       end
       _x = _x + width
     end
     if self.ShowText then
       local text = round((total / self.Maximum) * 100) .. '%'
-      Drawing.DrawCharactersCenter(X, Y, self.Width, self.Height, text, self.TextColour, colours.transparent)
+      Drawing.DrawCharactersCenter(self.X, self.Y, self.Width, self.Height, text, self.TextColour, colours.transparent)
     end
     -- end
   end,
