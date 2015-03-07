@@ -257,7 +257,6 @@ end
 
 function PocketDialPage()
   PocketResetPage("PocketDialPage","Dial Page")
-  table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 6, Drawing.Screen.Height - 1, nil, nil, nil, nil, setPassword, 'Save', colours.black))
 
   table.insert(Current.PageControls, Label:Initialise(1, 3, 'Instant Dials', colours.blue))
   table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 5, 3, nil, nil, nil, nil, PocketAddingDialPage, 'Add', colours.black))
