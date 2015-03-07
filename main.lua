@@ -232,8 +232,8 @@ end
 
 function PocketIrisPage()
   PocketResetPage("PocketIrisPage","Iris Page")
-  table.insert(Current.PageControls, Button:Initialise(2,3, nil, nil, nil, nil, PocketCloseIrisPage, 'Close', colours.black))
-  table.insert(Current.PageControls, Button:Initialise(2,5, nil, nil, nil, nil, PocketOpenIrisPage, 'Open', colours.black))
+  table.insert(Current.PageControls, Button:Initialise(2,3, nil, nil, nil, nil, Stargate.CloseIris 'Close', colours.black))
+  table.insert(Current.PageControls, Button:Initialise(2,5, nil, nil, nil, nil, Stargate.OpenIris, 'Open', colours.black))
 end
 
 function AddLabelValue(line,label,value)
@@ -258,10 +258,6 @@ function PocketStatePage()
   AddLabelValue(3,"Iris:",iris)
 end
 
-function PocketDisconnectPage()
-  PocketResetPage("PocketDisconnectPage","Disconnect Page")
-end  
-
 function PocketHomePage()
   ResetPage()
   Current.Page = 'PocketHome'
@@ -278,7 +274,7 @@ function PocketHomePage()
     table.insert(Current.PageControls, Button:Initialise(2,3, nil, nil, nil, nil, PocketDailPage, 'Dail', colours.black))
     table.insert(Current.PageControls, Button:Initialise(2,5, nil, nil, nil, nil, PocketIrisPage, 'Iris', colours.black))
     table.insert(Current.PageControls, Button:Initialise(2,7, nil, nil, nil, nil, PocketStatePage, 'State', colours.black))
-    table.insert(Current.PageControls, Button:Initialise(2,9, nil, nil, nil, nil, PocketDisconnectPage, 'Disconnect', colours.black))
+    table.insert(Current.PageControls, Button:Initialise(2,9, nil, nil, nil, nil, Stargate.Disconnect, 'Disconnect', colours.black))
   end
 end
 
