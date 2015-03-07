@@ -472,7 +472,7 @@ Stargate = {
   GetStargateState = function()
     if pocket or not Current.Settings.host then
       local id = Stargate.SendMessage('GetStargateState')
-      return unpack(Stargate.RecieveMessage(id))
+      return Stargate.RecieveMessage(id)
     else
       return Peripheral.CallType(Stargate.label, 'stargateState')
     end

@@ -261,8 +261,12 @@ function PocketStatePage()
   AddLabelValue(4,"Remote:",remAddr)
   local state, chevrons, direction = Stargate.GetStargateState()
   AddLabelValue(5,"State:",state)
-  AddLabelValue(6,"Engaged:",chevrons)
-  AddLabelValue(7,"Direction:",direction)
+  if chevrons then
+    AddLabelValue(6,"Engaged:",chevrons)
+  end
+  if direction then
+    AddLabelValue(7,"Direction:",direction)
+  end
   local energy = Stargate.GetEnergyAvailable()
   AddLabelValue(8,"Energy:",energy)
   local iris = Stargate.GetIrisState()
