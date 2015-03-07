@@ -474,6 +474,7 @@ Stargate = {
       local id = Stargate.SendMessage('GetStargateState')
       return Stargate.RecieveMessage(id)
     else
+      SetText('Stargate Control', 'State', colours.grey, true)
       return Peripheral.CallType(Stargate.label, 'stargateState')
     end
   end,
@@ -501,6 +502,7 @@ Stargate = {
       local id = Stargate.SendMessage('Dail',address)
       return Stargate.RecieveMessage(id)
     else
+      SetText('Stargate Control', 'Dail..'..address, colours.grey, true)
       return Peripheral.CallType(Stargate.label, 'dail', address)
     end
   end,
