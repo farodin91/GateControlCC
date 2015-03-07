@@ -232,8 +232,15 @@ end
 
 function PocketIrisPage()
   PocketResetPage("PocketIrisPage","Iris Page")
-  table.insert(Current.PageControls, Button:Initialise(2,3, nil, nil, nil, nil, Stargate.CloseIris 'Close', colours.black))
-  table.insert(Current.PageControls, Button:Initialise(2,5, nil, nil, nil, nil, Stargate.OpenIris, 'Open', colours.black))
+  local close = function()
+    Stargate.CloseIris()
+  end
+  local open = function()
+    Stargate.OpenIris()
+  end
+
+  table.insert(Current.PageControls, Button:Initialise(2,3, nil, nil, nil, nil, close, 'Close', colours.black))
+  table.insert(Current.PageControls, Button:Initialise(2,5, nil, nil, nil, nil, open, 'Open', colours.black))
 end
 
 function AddLabelValue(line,label,value)
