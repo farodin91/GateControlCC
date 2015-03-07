@@ -283,10 +283,10 @@ function PocketHomePage()
 
   if not Current.Intern then
     table.insert(Current.PageControls, Button:Initialise(2,3, nil, nil, nil, nil, PocketCallHome, 'Call Home', colours.black))
-    table.insert(Current.PageControls, Button:Initialise(2,5, nil, nil, nil, nil, PocketDailPage, 'Dail', colours.black))
+    table.insert(Current.PageControls, Button:Initialise(2,5, nil, nil, nil, nil, PocketDialPage, 'Dial', colours.black))
     table.insert(Current.PageControls, Button:Initialise(2,7, nil, nil, nil, nil, Stargate.Disconnect, 'Disconnect', colours.black))
   else
-    table.insert(Current.PageControls, Button:Initialise(2,3, nil, nil, nil, nil, PocketDailPage, 'Dail', colours.black))
+    table.insert(Current.PageControls, Button:Initialise(2,3, nil, nil, nil, nil, PocketDialPage, 'Dial', colours.black))
     table.insert(Current.PageControls, Button:Initialise(2,5, nil, nil, nil, nil, PocketIrisPage, 'Iris', colours.black))
     table.insert(Current.PageControls, Button:Initialise(2,7, nil, nil, nil, nil, PocketStatePage, 'State', colours.black))
     table.insert(Current.PageControls, Button:Initialise(2,9, nil, nil, nil, nil, Stargate.Disconnect, 'Disconnect', colours.black))
