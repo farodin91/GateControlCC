@@ -390,7 +390,8 @@ Stargate = {
   HandleMessageWireless = function(id,message)
     if message.protocol == 'stargate' and message.version >= 1 then
       local f = Stargate[message.response.action]
-      local ok =nil,result = nil
+      local ok =nil
+      local result = nil
       if message.response.content == nil then
         ok,result = pcall(f)
       else
