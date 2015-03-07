@@ -354,7 +354,7 @@ function Timer(event, timer)
   if timer == pingTimer then
     PingPocketComputers()
   elseif timer == statusResetTimer then
-    --ResetStatus()
+    ResetStatus()
   end
 end
 
@@ -396,9 +396,6 @@ Stargate = {
         ok,result = pcall(f)
       else
         ok,result = pcall(f,message.response.content)
-      end
-      if message.response.action == 'Dial' then
-        SetText('Stargate Control', result, colours.grey, true)
       end
       Wireless.SendMessage(Wireless.Channels.GateRequestReply,{protocol = 'stargate',version = version, response = {action=message.response.action,ok=ok,result=result}},nil,id)
     end
@@ -477,7 +474,6 @@ Stargate = {
       local id = Stargate.SendMessage('GetStargateState')
       return Stargate.RecieveMessage(id)
     else
-      SetText('Stargate Control', 'State', colours.grey, true)
       return Peripheral.CallType(Stargate.label, 'stargateState')
     end
   end,
@@ -505,7 +501,6 @@ Stargate = {
       local id = Stargate.SendMessage('Dial',address)
       return Stargate.RecieveMessage(id)
     else
-      SetText('Stargate Control', 'Dial..'..address, colours.grey, true)
       return Peripheral.CallType(Stargate.label, 'dial', address)
     end
   end,

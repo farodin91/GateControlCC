@@ -216,13 +216,48 @@ function PocketDialingPage(address)
   Draw()
 
   Stargate.Dial(address)
+
+  -- Progress
+end
+
+local textbox = nil
+local textbox2 = nil
+function PocketAddingDialPage()
+  ResetPage()
+  Current.Page = "PocketAddingDialPage"
+  AddHeader("Dial Page")
+  table.insert(Current.PageControls, Button:Initialise(2, Drawing.Screen.Height - 1, nil, nil, nil, nil, PocketDialPage, 'Cancel', colours.black))
+  
+  table.insert(Current.PageControls, Label:Initialise(1, 5, 'Name:'))
+  table.insert(Current.PageControls, Label:Initialise(1, 6, 'Address:'))
+  local change = function(key)
+    if key == keys.enter then
+      Current.TextInput = textbox2.TextInput
+    end
+  end
+
+  textbox = TextBox:Initialise(10, 5, 10, nil, nil, nil, colours.white,colours.black,change,nil)
+  textbox2 = TextBox:Initialise(10, 6, 10, nil, nil, nil, colours.white,colours.black,nil,nil)
+
+  local addAddress = function()
+    local name = textbox.TextInput.Value
+    local address = textbox2.TextInput.Value
+    if name ~= "" and address ~= "" then
+      table.insert(Current.Settings.Addresses,{address,name})
+      SaveSettings()
+    end
+  end
+
+  table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 6, Drawing.Screen.Height - 1, nil, nil, nil, nil, addAddress, 'Save', colours.black))
+
 end
 
 function PocketDialPage()
   PocketResetPage("PocketDialPage","Dial Page")
+  table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 6, Drawing.Screen.Height - 1, nil, nil, nil, nil, setPassword, 'Save', colours.black))
 
   table.insert(Current.PageControls, Label:Initialise(1, 3, 'Instant Dials', colours.blue))
-  table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 5, 3, nil, nil, nil, nil, nil, 'Add', colours.black))
+  table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 5, 3, nil, nil, nil, nil, PocketAddingDialPage, 'Add', colours.black))
   local lastI = 0
   for i,v in ipairs(Current.Settings.Addresses) do
     local dialing = function()
@@ -339,13 +374,10 @@ function PocketStatusPage()
   end
 end
 
-local textbox = nil
-local textbox2 = nil
 function PocketSetupPage()
   ResetPage()
   Current.Page = 'PocketSetup'
-  --table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 6, Drawing.Screen.Height - 1, nil, nil, nil, nil, PocketStatusPage, 'Save', colours.black))
-  table.insert(Current.PageControls, Label:Initialise(9, 1, 'Setup Page', colours.blue))
+  AddHeader("Setup Page")
   
   table.insert(Current.PageControls, Label:Initialise(1, 5, 'Password:'))
   table.insert(Current.PageControls, Label:Initialise(1, 6, 'Re-Password:'))
@@ -371,6 +403,17 @@ function PocketSetupPage()
 
   textbox = TextBox:Initialise(13, 5, 10, nil, nil, nil, colours.white,colours.black,change,nil)
   textbox2 = TextBox:Initialise(13, 6, 10, nil, nil, nil, colours.white,colours.black,change2,nil)
+
+  local setPassword = function()
+    local key2 = Current.TextInput.Value
+    if key2 == key1 then
+      Current.Settings.Password = key1
+      SaveSettings()
+      PocketStatusPage()
+    end
+  end
+
+  table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 6, Drawing.Screen.Height - 1, nil, nil, nil, nil, setPassword, 'Save', colours.black))
   Current.TextInput = textbox.TextInput
   table.insert(Current.PageControls, textbox)
   table.insert(Current.PageControls, textbox2)
@@ -408,7 +451,6 @@ function HostInitialise()
   if fs.exists('.settings') then
     HostStatusPage()               
   else
-
     HostSetupPage()
   end
 end
@@ -428,6 +470,8 @@ function Initialise(arg)
       Current.Settings = textutils.unserialize(h.readAll())
     end
     h.close()
+  else
+    Current.Settings = DefaultSettings
   end
 
   if pocket or not Current.Settings.host then
