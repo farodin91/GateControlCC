@@ -359,7 +359,7 @@ ProgressBar = {
   end,
 
   Draw = function(self)
-    Drawing.DrawBlankArea(X, Y, self.Width, self.Height, self.BackgroundColour)
+    Drawing.DrawBlankArea(self.X, self.Y, self.Width, self.Height, self.BackgroundColour)
 -- if self.Indeterminate then
 -- for i = 1, self.Width do
 -- local s = x + i - 1 + self.AnimationStep
