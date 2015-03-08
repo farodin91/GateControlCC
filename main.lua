@@ -263,17 +263,17 @@ end
 function PocketDialPage()
   PocketResetPage("PocketDialPage","Dial Page")
 
-  table.insert(Current.PageControls, Label:Initialise(1, 3, 'Instant Dials', colours.blue))
+  table.insert(Current.PageControls, Label:Initialise(2, 3, 'Instant Dials', colours.blue))
   table.insert(Current.PageControls, Button:Initialise(Drawing.Screen.Width - 5, 3, nil, nil, nil, nil, PocketAddingDialPage, 'Add', colours.black))
   local lastI = 0
   for i,v in ipairs(Current.Settings.Addresses) do
     local dialing = function()
       PocketDialingPage(v[1])
     end
-    table.insert(Current.PageControls, Button:Initialise(1, 4 + i, nil, nil, nil, nil, dialing, v[2], colours.black))
+    table.insert(Current.PageControls, Button:Initialise(3, 4 + i, nil, nil, nil, nil, dialing, v[2], colours.black))
     lastI = i
   end
-  table.insert(Current.PageControls, Label:Initialise(1, 6 + lastI, 'Maunal Dial', colours.blue))
+  table.insert(Current.PageControls, Label:Initialise(2, 6 + lastI, 'Maunal Dial', colours.blue))
 end
 
 function PocketIrisPage()
