@@ -214,7 +214,7 @@ function PocketDialingPage(address)
 
 
   local width = Drawing.Screen.Width -2
-  local Progress = ProgressBar:Initialise(2, Drawing.Screen.Height - 3, width,1,nil,40,nil,nil,nil)
+  local Progress = ProgressBar:Initialise(2, Drawing.Screen.Height - 3, width,1,nil,0.4,nil,nil,nil)
   table.insert(Current.PageControls, Progress)
   
   Draw()

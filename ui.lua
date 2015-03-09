@@ -330,7 +330,7 @@ ProgressBar = {
   TextColour = colours.white,
   ShowText = true,
   Value = 0,
-  Maximum = 100,
+  Maximum = 1,
   Indeterminate = false,
   AnimationStep = 0,
   Parent = nil,
@@ -355,7 +355,7 @@ ProgressBar = {
 
   UpdateValue  = function(self,value)
     self.Value = value
-    self.Draw()
+    Draw()
   end,
 
   Draw = function(self)
